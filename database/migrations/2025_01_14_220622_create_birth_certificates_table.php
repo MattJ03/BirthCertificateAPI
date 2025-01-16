@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('birth_certificates', function (Blueprint $table) {
             $table->id();
+            $table->string('first_name');
+            $table->enum('health_status',['positive', 'negative'])->default('positive');
+            $table->string('hospital_name');
+            $table->integer('hospital_code');
+            $table->string('parents_surname');
+            $table->date('birth_date');
             $table->timestamps();
         });
     }
