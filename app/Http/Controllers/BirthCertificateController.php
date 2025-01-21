@@ -73,8 +73,18 @@ class BirthCertificateController extends Controller
             return response()->json(['Message' => 'Not Found'], 403);
         }
         $validatedData = $request->validate([
+            'first_name' => 'required|string|max:50',
+            'health_status' => 'enum:positive,negative',
+            'hospital_name' => 'required|string|max:50',
+            'hospital_code' => 'required|string:max:10',
+            'parents_surname' => 'required|string|max:50',
+            'birth_date' => 'required|date'
 
-        ])
+        ]);
+
+        $certificate->update($validatedData);
+        return response()->json($certificate);
+
     }
 
     /**
@@ -82,6 +92,12 @@ class BirthCertificateController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $certificate = BirthCertificate::find($id);
+        if(!$certificate) {
+            return response()->json(['Message' => 'Not Found'], 404);
+        }
+
+        $certificate->delete();
+        return response()->json(['Message' => 'Message Deleted']);
     }
 }

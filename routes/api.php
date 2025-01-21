@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\BirthCertificateController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('birth_certificates', [BirthCertificateController::class, 'index']);
+Route::post('birth_certificates', [BirthCertificateController::class, 'store']);
+Route::get('birth_certificates/{id}', [BirthCertificateController::class, 'show']);
+Route::put('birth_certificates/{id}', [BirthCertificateController::class, 'update']);
