@@ -18,7 +18,11 @@ class BirthCertificateFactory extends Factory
     {
         return [
             'first_name' => fake()->firstName,
-            'health_status' => fake()->randomElement(['positive', 'negative'])
+            'health_status' => fake()->randomElement(['positive', 'negative']),
+            'hospital_name' => fake()->text(10),
+            'hospital_code' => fake()->unique()->numberBetween(1, 100),
+            'parents_surname' => fake()->lastName,
+            'birth_date' => fake()->date,
         ];
     }
 }
